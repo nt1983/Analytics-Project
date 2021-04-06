@@ -1,10 +1,11 @@
-function Demographic(Option){
+function Demographic(Option, file){
+    
     var pie = d3.pie()
      .value(function (d) {
           return d.value;
      }).sort(null)(data);
-     var width = 360;
-     var height = 360;
+     var width = 300;
+     var height = 300;
      var radius = Math.min(width, height) / 2;
      var donutWidth = 75;
      path = d3.select("#donut")
@@ -16,24 +17,25 @@ function Demographic(Option){
      path.transition().duration(500).attr("d", arc); // redrawing the path with a smooth transition
 }
 
-function Device_Pie_Chart(Option) {
-    ///// Data
-    //var totals=[];
-    var data=[];
-    d3.csv("./data/Nov_devices.csv", function(info) {
-        data.push(info.Device_Percentage); 
-        
-    //console.log(data);
-    });
-
-/////////////////////////////////////////////////////////////////////////////////
-    console.log(typeof data);
+function Device_Pie_Chart(Option,file) {  
+    //read data from json
+    d3.json(file).then(function (data){
+        console.log(data);
+        dataset=data;
+    //});
+    
     var width = 300;
     var height = 300;
-    var radius = Math.min(width, height) / 2;
+    var margin = 5;
+    var radius = Math.min(width, height) / 2-margin;
     var donutWidth = 75; //This is the size of the hole in the middle
-    //Only choose one! This one for a d3 color scheme:
-    var color = d3.scaleOrdinal().range(["#5A39AC", "#DD98D6", "#E7C820"]);
+    
+    var donutTip = d3.select("body").append("div")
+    .attr("class", "donut-tip")
+    .style("background", "lightgray")
+    .style("opacity", 0);
+    var color = d3.scaleOrdinal().range(["#5A39AC", "#DD98D6", "#08B2B2"]);
+
     var svg = d3.select('#donut')
      .append('svg')
      .attr('width', width)
@@ -41,19 +43,74 @@ function Device_Pie_Chart(Option) {
      .append('g')
      .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
 
-    var arc = d3.arc()
-     .innerRadius(radius - donutWidth)
-     .outerRadius(radius);
+    var arc = d3.arc().innerRadius(radius - donutWidth).outerRadius(radius);
     
-     var pie = d3.pie().value(function (d) {
-         console.log(d);
-          return d;
-     });//.sort(null); 
+    var pie = d3.pie().value(function (d) {
+        return d.Device_Percentage;
+    }).sort(null);
+    //var data_ready = pie(d3.entries(info))
 
+    var path = svg.selectAll('path')
+     .data(pie(dataset))
+     .enter()
+     .append('path')
+     .attr('d', arc)
+     .attr('fill', function (d, i) {
+          return color(d.data.Device_Name);
+     })
+          .attr('transform', 'translate(0, 0)')
+          .on('mouseover', function (d, i) {
+              d3.select(this).transition()
+                  .duration('50')
+                  .attr('opacity', '.85');
+              donutTip.transition()
+                  .duration(50)
+                  .style("opacity", 1);
+              let num = (d.data.Device_Percentage) + '%';
+              donutTip.html(num)
+                  .style("left", (d3.event.pageX + 10) + "px")
+                  .style("top", (d3.event.pageY - 15) + "px");                  
+      
+          })
+          .on('mouseout', function (d, i) {
+              d3.select(this).transition()
+                  .duration('50')
+                  .attr('opacity', '1');
+              donutTip.transition()
+                  .duration('50')
+                  .style("opacity", 0);
+          });
 
-    
-    //});
+    var legendRectSize = 13;
+    var legendSpacing = 7;
 
+    var legend = svg.selectAll('.legend') //the legend and placement
+    .data(color.domain())
+    .enter()
+    .append('g')
+    .attr('class', 'circle-legend')
+    .attr('transform', function (d, i) {
+        var height = legendRectSize + legendSpacing;
+        var offset = height * color.domain().length / 2;
+        var horz = -2 * legendRectSize - 13;
+        var vert = i * height - offset;
+        return 'translate(' + horz + ',' + vert + ')';
+    });
+
+    legend.append('circle') //keys
+    .style('fill', color)
+    .style('stroke', color)
+    .attr('cx', 0)
+    .attr('cy', 0)
+    .attr('r', '.5rem');
+
+    legend.append('text') //labels
+    .attr('x', legendRectSize + legendSpacing)
+    .attr('y', legendRectSize - legendSpacing)
+    .text(function (d) {
+     return d;
+});
+});
 }
 
 function init() {
@@ -63,12 +120,23 @@ function init() {
           dropdown.append("option").text(item).property("value", item);
         });
     const FirstOption=SampleName[0];
-    Device_Pie_Chart(FirstOption);
+    const donut_ref_file1="data\\Nov_devices.json"
+    Device_Pie_Chart(FirstOption, donut_ref_file1);
+
 }
 
 function optionChanged(Opt){
-    Device_Pie_Chart(Opt);
-    Demographic(Opt);
+    d3.select("#donut").selectAll("*").remove();
+    if (Opt=="Whole November") {
+        const donut_ref_file2="data\\Nov_devices.json"
+        Device_Pie_Chart(Opt, donut_ref_file2);
+    }
+    else {
+        const donut_ref_file2="data\\BlackFriday_devices.json";
+        Device_Pie_Chart(Opt, donut_ref_file2);
+    }
+    //Device_Pie_Chart(Opt, donut_ref_file2);
+    //Demographic(Opt);
   }
 
 init();
