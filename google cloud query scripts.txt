@@ -39,7 +39,7 @@ FROM
 WHERE
   _TABLE_SUFFIX BETWEEN '20161101'
   AND '20161130'
-  AND fullVisitorId<>"0000020424342248747"
+  --AND fullVisitorId<>"0000020424342248747"
 -------------------------------------------------------
 hits.product
 
