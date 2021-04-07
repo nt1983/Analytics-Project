@@ -1,13 +1,12 @@
--- Table: public.products
+-- Table: Nov_devices
 
-DROP TABLE IF EXISTS public.products;
+DROP TABLE IF EXISTS Nov_devices;
 
-CREATE TABLE public.products
+CREATE TABLE Nov_devices
 (
-    product_id character varying(40) COLLATE pg_catalog."default" NOT NULL,
-    product_category_name character varying(50) COLLATE pg_catalog."default",
-    product_name_lenght integer,
-    product_description_lenght integer,
+    Device_Name character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    Device_Count integer,
+    Device_Percentage float,
     product_photos_qty integer,
     product_weight_g integer,
     product_length_cm integer,
