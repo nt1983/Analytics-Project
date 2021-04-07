@@ -120,7 +120,7 @@ function init() {
           dropdown.append("option").text(item).property("value", item);
         });
     const FirstOption=SampleName[0];
-    const donut_ref_file1="./static/data/Nov_devices.json"
+    const donut_ref_file1="/static/data/Nov_devices.json"
     Device_Pie_Chart(FirstOption, donut_ref_file1);
 
 }
@@ -132,7 +132,7 @@ function optionChanged(Opt){
         Device_Pie_Chart(Opt, donut_ref_file2);
     }
     else {
-        const donut_ref_file2="static/data/BlackFriday_devices.json";
+        const donut_ref_file2="/static/data/BlackFriday_devices.json";
         Device_Pie_Chart(Opt, donut_ref_file2);
     }
     //Device_Pie_Chart(Opt, donut_ref_file2);
