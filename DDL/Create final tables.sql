@@ -1,31 +1,33 @@
--- Table: Nov_devices
+-- Table: public.Nov_devices
 
-DROP TABLE IF EXISTS Nov_devices;
+-- DROP TABLE public.Nov_devices;
 
-CREATE TABLE Nov_devices
+CREATE TABLE public.Nov_devices
 (
-    Device_Name character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    Device_Name character varying(10) COLLATE pg_catalog."default",
     Device_Count integer,
-    Device_Percentage float,
-    product_photos_qty integer,
-    product_weight_g integer,
-    product_length_cm integer,
-    product_height_cm integer,
-    product_width_cm integer,
-	CREATE_DATE date,
-    CREATED_BY character varying(60) COLLATE pg_catalog."default",
-    CHANGED_DATE date,
-    CHANGED_BY character varying(60) COLLATE pg_catalog."default",
-    CONSTRAINT products_pkey PRIMARY KEY (product_id)
+    Device_Percentage real
 )
 
 TABLESPACE pg_default;
 
-ALTER TABLE public.products
+ALTER TABLE public.Nov_devices
     OWNER to postgres;
-	
-CREATE TRIGGER update_row_modified_function_
-    BEFORE INSERT OR UPDATE 
-    ON public.products
-    FOR EACH ROW
-    EXECUTE PROCEDURE public.update_row_modified_function_();	
+
+----------------------------------------------------------------
+
+-- Table: public.BlackFriday_devices
+
+-- DROP TABLE public.BlackFriday_devices;
+
+CREATE TABLE public.BlackFriday_devices
+(
+    Device_Name character varying(10) COLLATE pg_catalog."default",
+    Device_Count integer,
+    Device_Percentage real
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.BlackFriday_devices
+    OWNER to postgres;
