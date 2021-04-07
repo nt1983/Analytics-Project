@@ -19,7 +19,7 @@ function Demographic(Option, file){
 
 function Device_Pie_Chart(Option,file) {  
     //read data from json
-    d3.json(file).then(function (data){
+    d3.csv(file).then(function (data){
         console.log(data);
         dataset=data;
     //});
