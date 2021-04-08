@@ -1,6 +1,24 @@
-// function Demographic(Option, file){
+function visits_bar_chart(Option, file){
+    d3.csv(file).then(function (data){
+        console.log(data);
+        dataset=data;
+
+        var margin = {
+            top: 20,
+            right: 20,
+            bottom: 30,
+            left: 40
+        }
+        var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+
+
+        
+        });
     
-// }
+}
 
 function Device_Pie_Chart(Option,file) {  
     //read data from json
@@ -105,15 +123,18 @@ function init() {
           dropdown.append("option").text(item).property("value", item);
         });
     const FirstOption=SampleName[0];
-    const donut_ref_file1="/templates/static/data/Nov_devices.csv"
+    const donut_ref_file1="/templates/static/data/Nov_devices.csv";
     Device_Pie_Chart(FirstOption, donut_ref_file1);
+
+    const bar_ref_file1="/templates/static/data/Nov_Month_Visits.csv";
+    visits_bar_chart(FirstOption, bar_ref_file1);
 
 }
 
 function optionChanged(Opt){
     d3.select("#donut").selectAll("*").remove();
     if (Opt=="Whole November") {
-        const donut_ref_file2="/templates/static/data/Nov_devices.csv"
+        const donut_ref_file2="/templates/static/data/Nov_devices.csv";
         
         Device_Pie_Chart(Opt, donut_ref_file2);
     }
