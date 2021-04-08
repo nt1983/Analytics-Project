@@ -3,7 +3,7 @@ def create_classes(db):
         __tablename__ = 'Nov_devices'
 
         Device_Name = db.Column(db.String(10), primary_key=True)
-        Device_Count = db.Column(db.integer)
+        Device_Count = db.Column(db.Integer)
         Device_Percentage = db.Column(db.Float)
         
         def __repr__(self):

@@ -1,21 +1,4 @@
-function Demographic(Option, file){
-    
-    var pie = d3.pie()
-     .value(function (d) {
-          return d.value;
-     }).sort(null)(data);
-     var width = 300;
-     var height = 300;
-     var radius = Math.min(width, height) / 2;
-     var donutWidth = 75;
-     path = d3.select("#donut")
-          .selectAll("path")
-          .data(pie); // Compute the new angles
-     var arc = d3.arc()
-          .innerRadius(radius - donutWidth)
-          .outerRadius(radius);
-     path.transition().duration(500).attr("d", arc); // redrawing the path with a smooth transition
-}
+
 
 function Device_Pie_Chart(Option,file) {  
     //read data from json
@@ -120,7 +103,10 @@ function init() {
           dropdown.append("option").text(item).property("value", item);
         });
     const FirstOption=SampleName[0];
-    const donut_ref_file1="data\\Nov_devices.csv"
+    const donut_ref_file1="\\data\\Nov_devices.csv"
+    d3.csv(donut_ref_file1, function(error, data){
+        console.log(data);
+    });
     Device_Pie_Chart(FirstOption, donut_ref_file1);
 
 }
