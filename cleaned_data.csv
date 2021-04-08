@@ -1,28 +1,6 @@
-Browser,Visitor
-Chrome,70033
-Safari,35845
-Firefox,3316
-Internet Explorer,1881
-Edge,924
-Opera,554
-Opera Mini,501
-Safari (in-app),276
-YaBrowser,194
-UC Browser,160
-Coc Coc,58
-Amazon Silk,48
-Android Browser,43
-Mozilla Compatible Agent,32
-Maxthon,27
-BlackBerry,25
-MRCHROME,24
-Nintendo Browser,13
-LYF_LS_4002_12,4
-Nokia Browser,3
-Mozilla,2
-Nichrome,2
-Iron,2
-MQQBrowser,1
-DASH_JR_3G,1
-ThumbSniper,1
-Apple-iPhone7C2,1
+,Browser_Name,Total_Visitors_wholemonth,Total_Visitors_on_BlackFriday
+0,Chrome,70033,2282
+1,Safari,35845,1163
+2,Firefox,3316,131
+3,Internet Explorer,1881,74
+4,Edge,924,34
