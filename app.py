@@ -1,5 +1,7 @@
 from models import create_classes
 import os
+import numpy as np
+import pandas as pd
 from flask import (
     Flask,
     render_template,
@@ -19,12 +21,14 @@ app = Flask(__name__)
 from flask_sqlalchemy import SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
 
+#engine = create_engine('postgres+psycopg2://postgres:password@localhost:5432/project2_db')
+
 # Remove tracking modifications
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-Pet = create_classes(db)
+Website_Analytics = create_classes(db)
 
 # create route that renders index.html template
 @app.route("/")
