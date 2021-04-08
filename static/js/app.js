@@ -103,7 +103,7 @@ function init() {
           dropdown.append("option").text(item).property("value", item);
         });
     const FirstOption=SampleName[0];
-    const donut_ref_file1="\\data\\Nov_devices.csv"
+    const donut_ref_file1="{{ url_for('static', filename='data/Nov_devices.csv') }}"//"static\data\Nov_devices.csv"
     d3.csv(donut_ref_file1, function(error, data){
         console.log(data);
     });

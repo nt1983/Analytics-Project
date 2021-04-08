@@ -17,3 +17,6 @@ COPY BlackFriday_devices (
     )
 /*Update your location of the files here*/	
 FROM 'C:\Git\Analytics-Project\data/BlackFriday_devices.csv' DELIMITER ',' CSV HEADER;
+-----------------------------------------------------------------------------------
+
+--command " "\\copy public.nov_devices (device_name, device_count, device_percentage) FROM 'C:/Git/ANALYT~1/data/NOV_DE~1.CSV' DELIMITER ',' CSV HEADER QUOTE '\"' ESCAPE '''';""
