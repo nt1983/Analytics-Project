@@ -1,0 +1,36 @@
+div.tooltip {	
+  position: absolute;			
+  text-align: center;								
+  padding: .5rem;				
+  background: #FFFFFF;
+  color: #313639;	
+  border: 1px solid #313639;		
+  border-radius: 8px;			
+  pointer-events: none;
+  font-size: 1.3rem;			
+}
+
+.donut-tip {	
+  position: absolute;			
+  text-align: center;								
+  padding: .5rem;				
+  background: #FFFFFF;
+  color: #313639;	
+  border: 1px solid #313639;		
+  border-radius: 8px;			
+  pointer-events: none;
+  font-size: 1.3rem;			
+}
+@media only screen and (max-width: 600px) {
+  .legend-bar text{
+    font-size: .5rem;
+  }
+  .legend-bar rect{
+    width: 5px;
+    height: 5px;
+  }
+
+  .tooltip {	
+      font-size: 1rem;			
+  }
+}
