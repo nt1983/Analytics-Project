@@ -235,10 +235,10 @@ function init() {
           dropdown.append("option").text(item).property("value", item);
         });
     const FirstOption=SampleName[0];
-    const donut_ref_file1="/templates/static/data/Nov_devices.csv";
+    const donut_ref_file1="/data/Nov_devices.csv";
     Device_Pie_Chart(FirstOption, donut_ref_file1);
 
-    const bar_ref_file1="/templates/static/data/Nov_Month_Visits.csv";
+    const bar_ref_file1="/data/Nov_Month_Visits.csv";
     visits_bar_chart(FirstOption, bar_ref_file1);
 
 }
@@ -246,12 +246,12 @@ function init() {
 function optionChanged(Opt){
     d3.select("#donut").selectAll("*").remove();
     if (Opt=="Whole November") {
-        const donut_ref_file2="/templates/static/data/Nov_devices.csv";
+        const donut_ref_file2="/data/Nov_devices.csv";
         
         Device_Pie_Chart(Opt, donut_ref_file2);
     }
     else {
-        const donut_ref_file2="/templates/static/data/BlackFriday_devices.csv";
+        const donut_ref_file2="/data/BlackFriday_devices.csv";
         Device_Pie_Chart(Opt, donut_ref_file2);
     }
     //Device_Pie_Chart(Opt, donut_ref_file2);
