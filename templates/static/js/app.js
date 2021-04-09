@@ -3,7 +3,7 @@ function visits_bar_chart(Option, file){
         console.log(dataframe);
         data=dataframe;
         console.log(data);
-
+        var color = d3.scaleOrdinal().range(["#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC"]);
         var margin = {
             top: 20,
             right: 20,
@@ -106,7 +106,10 @@ function visits_bar_chart(Option, file){
             div.transition()
             .duration('200')
             .style("opacity", 0);
-        });
+        }); 
+        if (Option=="Black Friday") {
+
+        }
         if (width < 500) {
             svg.append("g")
                 .attr("transform", "translate(0," + height + ")")
