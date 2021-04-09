@@ -33,6 +33,7 @@ function visits_bar_chart(Option, file){
         width = w - 50 - margin.right;
         height = h - margin.top - margin.bottom;
 
+
         data.forEach(function (d){
             ParseDate=d3.timeParse("%Y-%m-%d");
             d.Visit_Date=ParseDate(d.Visit_Date);
@@ -69,7 +70,7 @@ function visits_bar_chart(Option, file){
         .data([data])
         .attr("class", "line")
         .attr("d", valueline)
-        .attr("stroke", "#32CD32")
+        .attr("stroke", "#5A39AC")
         .attr("stroke-width", 2)
         .attr("fill", "#FFFFFF");
 
@@ -84,7 +85,7 @@ function visits_bar_chart(Option, file){
         .attr("cy", function (d) {
             return y(d.Visit_Count);
         })
-        .attr("stroke", "#32CD32")
+        .attr("stroke", "#5A39AC")
         .attr("stroke-width", 1.5)
         .attr("fill", "#FFFFFF")
         .on('mouseover', function (d, i) {
