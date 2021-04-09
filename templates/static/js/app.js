@@ -1,7 +1,8 @@
 function visits_bar_chart(Option, file){
-    d3.csv(file).then(function (data){
+    d3.csv(file).then(function (dataframe){
+        console.log(dataframe);
+        data=dataframe;
         console.log(data);
-        dataset=data;
 
         var margin = {
             top: 20,
@@ -12,10 +13,117 @@ function visits_bar_chart(Option, file){
         var div = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
+        default_width = 700 - margin.left - margin.right;
+        default_height = 500 - margin.top - margin.bottom;
+        default_ratio = default_width / default_height;
 
+        //set size
+        current_width = window.innerWidth;
+        current_height = window.innerHeight;
+        current_ratio = current_width / current_height;
+        if (current_ratio > default_ratio) {
+            h = default_height;
+            w = default_width;
+            // mobile
+        } else {
+            margin.left = 40
+            w = current_width - 40;
+            h = w / default_ratio;
+        };
+        width = w - 50 - margin.right;
+        height = h - margin.top - margin.bottom;
 
+        data.forEach(function (d){
+            ParseDate=d3.timeParse("%Y-%m-%d");
+            d.Visit_Date=ParseDate(d.Visit_Date);
+            d.Visit_Count= +d.Visit_Count;
+        });
 
+        var x = d3.scaleTime().range([0, width]);
+        var y = d3.scaleLinear().range([height, 0]);
+        x.domain(d3.extent(data, function (d) {
+            return d.Visit_Date++;
+        }));
+        y.domain([0, d3.max(data, function (d) {
+            return d.Visit_Count++;
+        })]);
+        //define line
+        var valueline = d3.line()
+        .x(function (d) {
+            return x(d.Visit_Date);
+        })
+        .y(function (d) {
+            return y(d.Visit_Count);
+        });
+
+        // append svg to body
+        var svg = d3.select("#scatter").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
         
+        //trendline
+        svg.append("path")
+        .data([data])
+        .attr("class", "line")
+        .attr("d", valueline)
+        .attr("stroke", "#32CD32")
+        .attr("stroke-width", 2)
+        .attr("fill", "#FFFFFF");
+
+        // Add the points
+        var path = svg.selectAll("dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("r", 5)
+        .attr("cx", function (d) {
+            return x(d.Visit_Date);
+        })
+        .attr("cy", function (d) {
+            return y(d.Visit_Count);
+        })
+        .attr("stroke", "#32CD32")
+        .attr("stroke-width", 1.5)
+        .attr("fill", "#FFFFFF")
+        .on('mouseover', function (d, i) {
+            d3.select(this).transition()
+            .duration('100')
+            .attr("r", 7);
+            div.transition()
+            .duration('100')
+            .style("opacity", 1);
+            div.html(d.Visit_Count)
+            .style("left", (d3.event.pageX + 10) + "px")
+            .style("top", (d3.event.pageY - 15) + "px");
+        })
+        .on('mouseout', function (d, i) {
+            d3.select(this).transition()
+            .duration('200')
+            .attr("r", 5);
+            div.transition()
+            .duration('200')
+            .style("opacity", 0);
+        });
+        if (width < 500) {
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x).ticks(5));
+        } else {
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+        }
+        
+        svg.append("g")
+            .call(d3.axisLeft(y).tickFormat(function (d) {
+                return (d)
+        }));
+
+
+
+
         });
     
 }
