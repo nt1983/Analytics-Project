@@ -126,10 +126,11 @@ function visits_bar_chart(Option, file){
             .attr("stroke-width", 1.5)
             .attr("fill", "red")
             .attr("r", 10);
-            div.transition().duration('200').style("opacity", 1);
-            div.html(data.Visit_Count);
-                 //.style("left", (d3.event.pageX + 10) + "px")
-                 //.style("top", (d3.event.pageY - 15) + "px");
+            var pageX=50;
+            var pageY=50;
+            div.html(data.Visit_Count)
+            .style("left", (pageX + 10) + "px")
+            .style("top", (pageY - 15) + "px");
 
             // .on('mouseover', function (d, i) {
             //     d3.select(this).transition()
@@ -291,7 +292,7 @@ function optionChanged(Opt){
         const donut_ref_file2="/static/data/Nov_devices.csv";
         Device_Pie_Chart(Opt, donut_ref_file2);
         const bar_ref_file2="/static/data/Nov_Month_Visits.csv";
-        visits_bar_chart(FirstOption, bar_ref_file2);
+        visits_bar_chart(Opt, bar_ref_file2);
     }
     else {
         const donut_ref_file2="/static/data/BlackFriday_devices.csv";
