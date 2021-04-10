@@ -139,17 +139,6 @@ function visits_bar_chart(Option, file){
                 .style("top", (d3.event.pageY - 15) + "px")
                 .style("color", "red");
             });
-            // .on('mouseout', function (d, i) {
-            //     d3.select(this).transition()
-            //     .duration('200')
-            //     .attr("r", 10);
-            //     div.transition()
-            //     .duration('200')
-            //     .style("opacity", 0);
-        //}); 
-
-
-
         }
         if (width < 500) {
             svg.append("g")
