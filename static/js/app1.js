@@ -109,7 +109,8 @@ function visits_bar_chart(Option, file){
         
         //Black Friday Dot
         if (Option==="Black Friday") {
-            var data=[{Visit_Date: 1480060800001, Visit_Count: 3702}];
+            var data=[{Visit_Date: 1480060800001, Visit_Count: 3702, eve:"Black Friday"},
+                {Visit_Date: 1480320000001, Visit_Count: 4722, eve:"Cyber Monday"}];
             console.log(Option);
             console.log(data);
             var path1 = svg.selectAll("dot")
@@ -125,24 +126,19 @@ function visits_bar_chart(Option, file){
             .attr("stroke", "red")
             .attr("stroke-width", 1.5)
             .attr("fill", "red")
-            .attr("r", 10);
-            var pageX=50;
-            var pageY=50;
-            div.html(data.Visit_Count)
-            .style("left", (pageX + 10) + "px")
-            .style("top", (pageY - 15) + "px");
-
-            // .on('mouseover', function (d, i) {
-            //     d3.select(this).transition()
-            //     .duration('100')
-            //     .attr("r", 10);
-            //     div.transition()
-            //     .duration('100')
-            //     .style("opacity", 1);
-            //     div.html(d.Visit_Count)
-            //     .style("left", (d3.event.pageX + 10) + "px")
-            //     .style("top", (d3.event.pageY - 15) + "px");
-            // })
+            .attr("r", 10)
+            .on('click', function (d, i) {
+                d3.select(this).transition()
+                .duration('300')
+                .attr("r", 10);
+                div.transition()
+                .duration('300')
+                .style("opacity", 1);
+                div.html(d.eve+ "<br/>"+ "Visitors: "+ d.Visit_Count)
+                .style("left", (d3.event.pageX + 10) + "px")
+                .style("top", (d3.event.pageY - 15) + "px")
+                .style("color", "red");
+            });
             // .on('mouseout', function (d, i) {
             //     d3.select(this).transition()
             //     .duration('200')
