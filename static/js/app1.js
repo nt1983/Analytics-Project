@@ -127,7 +127,7 @@ function visits_bar_chart(Option, file){
             .attr("stroke-width", 1.5)
             .attr("fill", "red")
             .attr("r", 10)
-            .on('click', function (d, i) {
+            .on('mouseover', function (d, i) {
                 d3.select(this).transition()
                 .duration('300')
                 .attr("r", 10);
