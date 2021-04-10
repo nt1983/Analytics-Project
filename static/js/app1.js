@@ -3,7 +3,6 @@ function visits_bar_chart(Option, file){
         console.log(dataframe);
         data=dataframe;
         console.log(data);
-        var color = d3.scaleOrdinal().range(["#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC","#5A39AC", "#5A39AC", "#5A39AC"]);
         var margin = {
             top: 20,
             right: 20,
@@ -107,7 +106,52 @@ function visits_bar_chart(Option, file){
             .duration('200')
             .style("opacity", 0);
         }); 
-        if (Option=="Black Friday") {
+        
+        //Black Friday Dot
+        if (Option==="Black Friday") {
+            var data=[{Visit_Date: 1480060800001, Visit_Count: 3702}];
+            console.log(Option);
+            console.log(data);
+            var path1 = svg.selectAll("dot")
+            .data(data)
+            .enter().append("circle")
+            .attr("r", 5)
+            .attr("cx", function (d) {
+            return x(d.Visit_Date);
+            })
+            .attr("cy", function (d) {
+                return y(d.Visit_Count);
+            })
+            .attr("stroke", "red")
+            .attr("stroke-width", 1.5)
+            .attr("fill", "red")
+            .attr("r", 10);
+            div.transition().duration('200').style("opacity", 1);
+            div.html(data.Visit_Count);
+                 //.style("left", (d3.event.pageX + 10) + "px")
+                 //.style("top", (d3.event.pageY - 15) + "px");
+
+            // .on('mouseover', function (d, i) {
+            //     d3.select(this).transition()
+            //     .duration('100')
+            //     .attr("r", 10);
+            //     div.transition()
+            //     .duration('100')
+            //     .style("opacity", 1);
+            //     div.html(d.Visit_Count)
+            //     .style("left", (d3.event.pageX + 10) + "px")
+            //     .style("top", (d3.event.pageY - 15) + "px");
+            // })
+            // .on('mouseout', function (d, i) {
+            //     d3.select(this).transition()
+            //     .duration('200')
+            //     .attr("r", 10);
+            //     div.transition()
+            //     .duration('200')
+            //     .style("opacity", 0);
+        //}); 
+
+
 
         }
         if (width < 500) {
@@ -125,10 +169,7 @@ function visits_bar_chart(Option, file){
                 return (d)
         }));
 
-
-
-
-        });
+    });
     
 }
 
@@ -245,17 +286,20 @@ function init() {
 
 function optionChanged(Opt){
     d3.select("#donut").selectAll("*").remove();
+    d3.select("#scatter").selectAll("*").remove();
     if (Opt=="Whole November") {
         const donut_ref_file2="/static/data/Nov_devices.csv";
-        
         Device_Pie_Chart(Opt, donut_ref_file2);
+        const bar_ref_file2="/static/data/Nov_Month_Visits.csv";
+        visits_bar_chart(FirstOption, bar_ref_file2);
     }
     else {
         const donut_ref_file2="/static/data/BlackFriday_devices.csv";
         Device_Pie_Chart(Opt, donut_ref_file2);
+        const bar_ref_file2="/static/data/Nov_Month_Visits.csv";
+        visits_bar_chart(Opt, bar_ref_file2);
     }
-    //Device_Pie_Chart(Opt, donut_ref_file2);
-    //Demographic(Opt);
+
   }
 
 init();
