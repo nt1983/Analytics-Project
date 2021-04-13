@@ -7,7 +7,7 @@ BRA	Brazil	4890
 TUR	Turkey	4694
 GBR	United Kingdom	3240
 CAN	Canada	2483
-Mex	Mexico	2200
+MEX	Mexico	2200
 ROU	Romania	2052
 IDN	Indonesia	1876
 JPN	Japan	1779
@@ -16,7 +16,7 @@ PHL	Philippines	1589
 RUS	Russia	1509
 NLD	Netherlands	1465
 FRA	France	1427
-poland	Poland	1276
+POL	Poland	1276
 TWN	Taiwan	1093
 MYS	Malaysia	1049
 UKR	Ukraine	993
@@ -175,17 +175,19 @@ NCL	New Caledonia	1
 GGY	Guernsey	1
 TJK	Tajikistan	1
 AND	Andorra	1
-176	Liberia	1
-177	Gambia	1
-178	Turks & Caicos Islands	1
-179	Zambia	1
-180	Guyana	1
-181	Bahamas	1
-182	Central African Republic	1
-183	Botswana	1
-184	Cayman Islands	1
-185	Northern Mariana Islands	1
-186	Bermuda	1
-187	St. Pierre & Miquelon	1
-188	San Marino	1
-189	Belize	1
+LBR	Liberia	1
+GMB	Gambia	1
+TCA	Turks & Caicos Islands	1
+ZMB	Zambia	1
+GUY	Guyana	1
+BHS	Bahamas	1
+CAF	Central African Republic	1
+BWA	Botswana	1
+CYM	Cayman Islands	1
+MNP	Northern Mariana Islands	1
+BMU	Bermuda	1
+SPM	St. Pierre & Miquelon	1
+SMR	San Marino	1
+BLZ	Belize	1
+TKM	Turkmenistan 0
+GRL	Greenland 0

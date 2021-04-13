@@ -337,3 +337,132 @@
   }
 // eslint-disable-next-line semi
 }));
+
+/////////////////////////////////////////////////////////////////
+function draw_map(Option, file) {
+const format = d3.format(',');
+    
+    // Set tooltips
+    const tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .html(d => `<strong>Country: </strong><span class='details'>${d.properties.name}<br></span><strong>NovemberVisits: </strong><span class='details'>${format(d.population)}</span>`);
+    
+    const margin = {top: 0, right: 0, bottom: 0, left: 0};
+    const width1 = 960 - margin.left - margin.right;
+    const height1 = 500 - margin.top - margin.bottom;
+    
+    const color = d3.scaleThreshold()
+      .domain([
+        50,
+        100,
+        500,
+        1000,
+        3000,
+        7000,
+        10000,
+        15000,
+        20000,
+        30500
+      ])
+      .range([
+        'rgb(220,20,60)',
+        'rgb(255,0,255)', 
+        'rgb(0,191,255)', 
+        'rgb(147,112,219)',
+        'rgb(138,43,226)',
+        'rgb(148,0,211)',
+        'rgb(153,50,204)',
+        'rgb(139,0,139)',
+        'rgb(128,0,128)',
+        'rgb(75,0,130)'
+      ]);
+    
+    const svg = d3.select('body')
+      .append('svg')
+      .attr('width', width1)
+      .attr('height', height1)
+      .append('g')
+      .attr('class', '#map');
+    
+    const projection = d3.geoRobinson()
+      .scale(148)
+      .rotate([352, 0, 0])
+      .translate( [width1 / 2, height1 / 2]);
+    
+    const path = d3.geoPath().projection(projection);
+    
+    svg.call(tip);
+    
+    Promise.all([
+      d3.json('world_countries.json'),
+      d3.tsv (file)
+    ]).then(
+      d => ready(null, d[0], d[1])
+    );
+    
+    function ready(error, data, population) {
+      const populationById = {};
+    
+      population.forEach(d => { populationById[d.id] = +d.population; });
+      data.features.forEach(d => { d.population = populationById[d.id] });
+    
+      svg.append('g')
+        .attr('class', 'countries')
+        .selectAll('path')
+        .data(data.features)
+        .enter().append('path')
+          .attr('d', path)
+          .style('fill', d => color(populationById[d.id]))
+          .style('stroke', 'white')
+          .style('opacity', 0.8)
+          .style('stroke-width', 0.3)
+          // tooltips
+          .on('mouseover',function(d){
+            tip.show(d);
+            d3.select(this)
+              .style('opacity', 1)
+              .style('stroke-width', 3);
+          })
+          .on('mouseout', function(d){
+            tip.hide(d);
+            d3.select(this)
+              .style('opacity', 0.8)
+              .style('stroke-width',0.3);
+          });
+
+    
+      svg.append('path')
+        .datum(topojson.mesh(data.features, (a, b) => a.id !== b.id))
+        .attr('class', 'names')
+        .attr('d', path);
+    }
+
+}
+
+    function init() {
+        var dropdown=d3.select("#selDataset");
+        var SampleName=["Whole November", "Black Friday"];
+            SampleName.forEach((item) => {
+              dropdown.append("option").text(item).property("value", item);
+            });
+        const FirstOption=SampleName[0];
+        const map_file1="Nov_Month_Countries.tsv";
+        draw_map(FirstOption, map_file1);
+    }
+    
+    function optionChanged(Opt){
+        d3.select("#map").selectAll("*").remove();
+        
+        if (Opt=="Whole November") {
+            const map_file2="Nov_Month_Countries.tsv";
+            draw_map(FirstOption, map_file2);
+        }
+        else {
+            const map_file2="Nov_Month_Countries.tsv";
+            draw_map(FirstOption, map_file2);
+        }
+    
+      }
+    
+    init();
