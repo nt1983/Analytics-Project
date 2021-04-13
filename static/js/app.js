@@ -394,7 +394,7 @@
       svg.call(tip);
       
       Promise.all([
-        d3.json('world_countries.json'),
+        d3.json('/static/data/world_countries.json'),
         d3.tsv (file)
       ]).then(
         d => ready(null, d[0], d[1])
