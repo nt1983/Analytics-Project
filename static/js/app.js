@@ -488,7 +488,7 @@ function visits_bar_chart(Option, file){
             return d.Visit_Date++;
         }));
         y.domain([0, d3.max(data, function (d) {
-            return d.Visit_Count++;
+            return d.Visit_Count+50;
         })]);
         //define line
         var valueline = d3.line()
