@@ -394,7 +394,7 @@
       svg.call(tip);
       
       Promise.all([
-        d3.json('/static/data/world_countries.json'),
+        d3.json('./static/data/world_countries.json'),
         d3.tsv (file)
       ]).then(
         d => ready(null, d[0], d[1])
@@ -704,11 +704,11 @@ function init() {
           dropdown.append("option").text(item).property("value", item);
         });
     const FirstOption=SampleName[0];
-    const donut_ref_file1="/static/data/Nov_devices.csv";
+    const donut_ref_file1="./static/data/Nov_devices.csv";
     Device_Pie_Chart(FirstOption, donut_ref_file1);
-    const bar_ref_file1="/static/data/Nov_Month_Visits.csv";
+    const bar_ref_file1="./static/data/Nov_Month_Visits.csv";
     visits_bar_chart(FirstOption, bar_ref_file1);
-    const map_file1="/static/data/Nov_Month_Countries.tsv";
+    const map_file1="./static/data/Nov_Month_Countries.tsv";
     draw_map(FirstOption, map_file1);
 
 }
@@ -718,19 +718,19 @@ function optionChanged(Opt){
     d3.select("#scatter").selectAll("*").remove();
     d3.selectAll("#map").selectAll("*").remove();
     if (Opt=="Whole November") {
-        const donut_ref_file2="/static/data/Nov_devices.csv";
+        const donut_ref_file2="./static/data/Nov_devices.csv";
         Device_Pie_Chart(Opt, donut_ref_file2);
-        const bar_ref_file2="/static/data/Nov_Month_Visits.csv";
+        const bar_ref_file2="./static/data/Nov_Month_Visits.csv";
         visits_bar_chart(Opt, bar_ref_file2);
-        const map_file2="/static/data/Nov_Month_Countries.tsv";
+        const map_file2="./static/data/Nov_Month_Countries.tsv";
         draw_map(Opt, map_file2);
     }
     else {
-        const donut_ref_file2="/static/data/BlackFriday_devices.csv";
+        const donut_ref_file2="./static/data/BlackFriday_devices.csv";
         Device_Pie_Chart(Opt, donut_ref_file2);
-        const bar_ref_file2="/static/data/Nov_Month_Visits.csv";
+        const bar_ref_file2="./static/data/Nov_Month_Visits.csv";
         visits_bar_chart(Opt, bar_ref_file2);
-        const map_file2="/static/data/bf_Countries.tsv";
+        const map_file2="./static/data/bf_Countries.tsv";
         draw_map(Opt, map_file2);
     }
 
