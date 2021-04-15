@@ -843,7 +843,7 @@ function optionChanged(Opt){
     d3.select("#donut").selectAll("*").remove();
     d3.select("#scatter").selectAll("*").remove();
     d3.selectAll("#map").selectAll("*").remove();
-    d3.select("#my_data").selectAll("*").remove();
+    //d3.select("#my_data").selectAll("*").remove();
     if (Opt=="Whole November") {
         const donut_ref_file2="./static/data/Nov_devices.csv";
         Device_Pie_Chart(Opt, donut_ref_file2);
