@@ -830,12 +830,12 @@ function init() {
     const map_file1="./static/data/Nov_Month_Countries.tsv";
     draw_map(FirstOption, map_file1);
     //const browser_file1="./static/data/cleaned_data.csv";
-    d3.csv("./static/data/cleaned_data.csv", function(error, data){
-      console.log(data);
-      d3.select("#my_data").selectAll("*").remove();
-      update("Total_Visitors_wholemonth");
+  //   d3.csv("./static/data/cleaned_data.csv", function(error, data){
+  //     console.log(data);
+  //     d3.select("#my_data").selectAll("*").remove();
+  //     update("Total_Visitors_wholemonth");
       
-  });
+  // });
 
 }
 
@@ -851,7 +851,7 @@ function optionChanged(Opt){
         visits_bar_chart(Opt, bar_ref_file2);
         const map_file2="./static/data/Nov_Month_Countries.tsv";
         draw_map(Opt, map_file2);
-        update("Total_Visitors_wholemonth");
+        //update("Total_Visitors_wholemonth");
     }
     else {
         const donut_ref_file2="./static/data/BlackFriday_devices.csv";
@@ -860,7 +860,7 @@ function optionChanged(Opt){
         visits_bar_chart(Opt, bar_ref_file2);
         const map_file2="./static/data/bf_Countries.tsv";
         draw_map(Opt, map_file2);
-        update("Total_Visitors_on_BlackFriday");
+        //update("Total_Visitors_on_BlackFriday");
     }
 
   }
