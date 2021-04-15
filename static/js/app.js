@@ -602,7 +602,7 @@ function visits_bar_chart(Option, file){
 }
 
 function Device_Pie_Chart(Option,file) {  
-    //read data from json
+    //read data from csv
     d3.csv(file).then(function (data){
         console.log(data);
         dataset=data;
